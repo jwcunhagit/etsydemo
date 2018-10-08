@@ -1,0 +1,11 @@
+<h5>Editing Listing</h5>
+
+<%= render 'form', listing: @listing %>
+
+<%= link_to @listing do %>
+	<i class="material-icons prefix">description</i>
+<% end %> 
+
+<%= link_to listings_path do%>
+	<i class="material-icons prefix">list</i>
+<% end %>

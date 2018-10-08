@@ -1,0 +1,57 @@
+<script>
+  $(document).ready(function() {
+    $('input#input_text, textarea#listing_description').characterCounter();
+  });
+</script>
+
+<div class="row">
+  <%= form_with(model: listing, local: true) do |form| %>
+  <form class="col s12">
+      <% if listing.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+          <ul>
+          <% listing.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="input-field cols s6">
+          <i class="material-icons prefix">mode_edit</i>
+          <%= form.text_field :name, class: "validade" %>
+          <%= form.label :name %>
+      </div>
+      <div class="row">
+        <div class="input-field cols s6">
+          <i class="material-icons prefix">mode_edit</i>
+          <%= form.text_area :description, class: "materialize-textarea", :options => {"data-length" => '120'} %>
+          <%= form.label :description%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field cols s6">
+          <i class="material-icons prefix">attach_money</i>
+          <%= form.text_field :price, class: "validade"  %>
+          <%= form.label :price%>
+      </div>
+      <div class="row">
+        <div class="file-field input-field cols s6">
+          <i class="material-icons prefix">cloud_upload</i>
+            <%= form.file_field :images, multiple: true, class: "validade"%>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+          </div>
+        </div>
+      </div>
+      
+      <div class="action">
+          <%= form.submit class: "btn waves-effect waves-light" %>
+      </div>
+    <% end %>
+  </form>
+</div>
+
+

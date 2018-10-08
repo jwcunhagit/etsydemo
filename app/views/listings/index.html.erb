@@ -1,0 +1,61 @@
+<script>
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+</script>
+
+<p id="notice"><%= notice %></p>
+
+<h5>Listings</h5>
+<div class="row">
+  <% @listings.each do |listing| %>
+      <div class="col s3">
+        <div class="card medium hoverable">
+          <div class="card-image waves-effect waves-block waves-light">
+            <% if listing.images.attached? %>
+              <% listing.images.each do |image| %>
+                <%= image_tag url_for(image) %> <br/>
+              <% end %>
+            <% else %>
+              <%= image_tag "noimage.png" %>
+            <% end %>
+            <!-- <span class="card-title"><%= listing.name %></span> -->
+          </div>
+          <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4 truncate">
+                <h6><%= listing.name %></h6>
+                <h6><strong><%= listing.price %></strong></h6>
+                <i class="material-icons right">more_vert</i>
+              </span>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+              <i class="material-icons right">close</i>
+              <h4><%= listing.name %></h4>
+              <h5><%= listing.description %></h5>
+              <h6><strong><%= listing.price %></strong></h6>
+            </span>
+          </div>
+          <div class="card-action">
+            <%= link_to edit_listing_path(listing) do%>
+                <i class="material-icons prefix">edit</i>
+            <% end %>
+            <%= link_to listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
+              <i class="material-icons prefix">delete</i>
+            <% end %>
+            <span class="activator">
+              <a>
+                <i class="material-icons right">remove_red_eye</i>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large waves-effect waves-light red" href=<%=new_listing_path%>>
+      <i class="material-icons">add</i>
+    </a>
+  </div>
+</div>
+

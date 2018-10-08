@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @listing.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @listing.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @listing.price %>
+</p>
+
+<p>
+	<% if @listing.images.attached? %>
+		<% @listing.images.each do |image| %>
+			<%= image_tag url_for(image.variant(resize: "100x100")) %> <br/>
+		<% end %>
+	<% end %>
+</p>
+
+
+<%= link_to edit_listing_path(@listing) do%>
+	<i class="material-icons prefix">edit</i>
+<% end %>
+<%= link_to listings_path do%>
+	<i class="material-icons prefix">list</i>
+<% end %>
