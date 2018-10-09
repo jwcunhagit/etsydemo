@@ -1,11 +1,25 @@
 <h5>Editing Listing</h5>
 
-<%= render 'form', listing: @listing %>
+<div class="row">
+	<div class="col s6">
+		<%= render 'form', listing: @listing %>
+	</div>
+	<div class="col s6" style="padding: 10px">
+		<%= render 'images_carousel', listing: @listing %>
+	</div>
+</div>
+
 
 <%= link_to @listing do %>
-	<i class="material-icons prefix">description</i>
+	<i class="material-icons left">description</i>
 <% end %> 
 
 <%= link_to listings_path do%>
-	<i class="material-icons prefix">list</i>
+	<i class="material-icons left">list</i>
 <% end %>
+
+<br>
+
+
+
+
