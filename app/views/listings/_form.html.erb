@@ -22,33 +22,36 @@
         <div class="input-field cols s6">
           <i class="material-icons prefix">mode_edit</i>
           <%= form.text_field :name, class: "validade" %>
-          <%= form.label :name %>
+          <%= form.label :name, class: "active"%>
       </div>
       <div class="row">
         <div class="input-field cols s6">
           <i class="material-icons prefix">mode_edit</i>
           <%= form.text_area :description, class: "materialize-textarea", :options => {"data-length" => '120'} %>
-          <%= form.label :description%>
+          <%= form.label :description , class: "active"%>
         </div>
       </div>
       <div class="row">
         <div class="input-field cols s6">
           <i class="material-icons prefix">attach_money</i>
           <%= form.text_field :price, class: "validade"  %>
-          <%= form.label :price%>
+          <%= form.label :price, class: "active"%>
       </div>
       <div class="row">
         <div class="file-field input-field cols s6">
-          <i class="material-icons prefix">cloud_upload</i>
-            <%= form.file_field :images, multiple: true, class: "validade"%>
+          <div class="waves-effect waves-light btn-small">
+            <i class="material-icons center">cloud_upload</i>
+              <%= form.file_field :images, multiple: true, class: "validade"%>
+          </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text" placeholder="Upload one or more files">
           </div>
         </div>
       </div>
       
-      <div class="action">
-          <%= form.submit class: "btn waves-effect waves-light" %>
+      <div class="waves-effect waves-light btn">
+          <i class="material-icons center">save</i>
+          <%= form.submit %>
       </div>
     <% end %>
   </form>
