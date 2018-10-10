@@ -16,7 +16,11 @@
     <div class="container">
 
       <% flash.each do |message_type, message| %>
-        <%= javascript_tag "M.toast({html: '#{message}'}, 4000)" %>
+        <% if message_type == "error" %>
+          <%= javascript_tag "M.toast({html: '#{message}', classes: 'terror', displayLength: '4000'})" %>
+        <% else %>
+          <%= javascript_tag "M.toast({html: '#{message}', classes: 'tsuccess', displayLength: '4000'})" %>
+        <% end %>
       <% end %>
     
       <%= yield %>
