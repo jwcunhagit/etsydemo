@@ -8,12 +8,17 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'https://s3.amazonaws.com/etsydemo05/images/favicon.ico', :rel => 'icon', :type =>  'image/png' %>
+    
   </head>
 
   <body>
+    <%=render "layouts/header" %>
     <div class="container">
-      <%=render "layouts/navbar" %>
-     
+
+      <% flash.each do |message_type, message| %>
+        <%= javascript_tag "M.toast({html: '#{message}'}, 4000)" %>
+      <% end %>
+    
       <%= yield %>
       
       <br>

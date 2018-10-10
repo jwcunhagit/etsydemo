@@ -23,3 +23,8 @@ Things you may want to cover:
 
 * ...
 # etsydemo
+
+
+* Mooking up mail server
+gem install mailcatcher
+mailcatcher
