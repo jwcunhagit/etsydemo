@@ -11,15 +11,16 @@ i{
   cursor: pointer;
 }
 
-.twarning{
+.toast-warning{
 	background-color: #ffab40;
 }
 
 
-.terror{
+.toast-error{
+	background-color: #ef5350;
+}
+
+.toast-success{
 	background-color: #43a047;
 }
 
-.tsuccess{
-	background-color: #ef5350;
-}

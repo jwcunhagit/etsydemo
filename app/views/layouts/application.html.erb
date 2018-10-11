@@ -16,10 +16,12 @@
     <div class="container">
 
       <% flash.each do |message_type, message| %>
-        <% if message_type == "error" %>
-          <%= javascript_tag "M.toast({html: '#{message}', classes: 'terror', displayLength: '4000'})" %>
+        <% if message_type == "alert" %>
+          <%= javascript_tag "M.toast({html: '#{message}', classes: 'toast-error', displayLength: '400000'})" %>
+        <% elsif message_type == "notice"%>
+          <%= javascript_tag "M.toast({html: '#{message}', classes: 'toast-success', displayLength: '4000'})" %>
         <% else %>
-          <%= javascript_tag "M.toast({html: '#{message}', classes: 'tsuccess', displayLength: '4000'})" %>
+          <%= javascript_tag "M.toast({html: '#{message}', classes: 'toast-warning', displayLength: '40000'})" %>
         <% end %>
       <% end %>
     
