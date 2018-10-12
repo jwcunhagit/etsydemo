@@ -24,7 +24,8 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    @listing = Listing.create!(listing_params)
+    #scaffold generated create bang version (with !) - it was raising an exception and not handling that in the view
+    @listing = Listing.create(listing_params)
 
     respond_to do |format|
       if @listing.save

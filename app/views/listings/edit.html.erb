@@ -18,6 +18,10 @@
 	<i class="material-icons left">list</i>
 <% end %>
 
+<%= link_to @listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
+	<i class="material-icons prefix">delete</i>
+<% end %>
+
 <br>
 
 

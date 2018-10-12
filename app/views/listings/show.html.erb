@@ -20,3 +20,6 @@
 <%= link_to listings_path do%>
 	<i class="material-icons prefix">list</i>
 <% end %>
+<%= link_to @listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
+	<i class="material-icons prefix">delete</i>
+<% end %>

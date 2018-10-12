@@ -12,7 +12,6 @@ module DeviseHelper
 
 		html = <<-HTML 
 			<div class="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times</button>
 				<h4>#{sentence}</h4>
 				#{messages}
 			</div>

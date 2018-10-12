@@ -1,25 +1,25 @@
 <script>
   $(document).ready(function() {
     $('input#input_text, textarea#listing_description').characterCounter();
+    M.textareaAutoResize($('.materialize-textarea'))
   });
-
-  M.textareaAutoResize($('.materialize-textarea'))
 </script>
 
+ <div id="errors">
+      <% if listing.errors.any? %>
+          <% errors = "" %>
+
+          <% listing.errors.full_messages.each do |message| %>
+            <%  errors = errors + message + "<br>" %>
+          <% end %>
+
+          <%= javascript_tag "M.toast({html: \"#{errors}\", classes: 'toast-error', displayLength: '40000'})" %>
+        
+      <% end %>
+    </div>
 <div class="row">
   <%= form_with(model: listing, local: true) do |form| %>
   <form class="col s6">
-      <% if listing.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
-
-          <ul>
-          <% listing.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
       <div class="row">
         <div class="input-field cols s6">
           <i class="material-icons prefix">mode_edit</i>
