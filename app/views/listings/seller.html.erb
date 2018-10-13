@@ -1,0 +1,66 @@
+<script>
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+</script>
+<h5>Listings \o/</h5>
+<div class="row">
+  <% @listings.each do |listing| %>
+      <div class="col s3">
+        <div class="card medium hoverable">
+          <div class="card-image waves-effect waves-block waves-light">
+            <% if listing.images.attached? %>
+              <% listing.images.each do |image| %>
+                  <%= image_tag url_for(image) , class: "activator"%>
+              <% end %>
+            <% else %>
+              <%= image_tag "https://s3.amazonaws.com/etsydemo05/images/noimage.png", class: "activator"%>
+            <% end %>
+          </div>
+          <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4 truncate">
+                <%= listing.name %>
+              </span>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+              <h4><%= listing.name %></h4>
+              <i class="material-icons right">close</i>
+            </span>
+              <p><%= listing.description %></p>
+              <p><strong><%= number_to_currency(listing.price) %></strong></p>
+              <p><%= "Sold by #{listing.user.first_name} #{listing.user.last_name}" %></p>
+            </span>
+          </div>
+          <div class="card-action">
+            <% if (user_signed_in? && ( current_user == listing.user)) %>
+              <%= link_to edit_listing_path(listing) do%>
+                <i class="material-icons prefix">edit</i>
+              <% end %>
+              <%= link_to listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
+                <i class="material-icons prefix">delete</i>
+              <% end %>
+            <% end %>
+            <%= link_to listing_path(listing) do%>
+              <i class="material-icons prefix">description</i>
+            <% end %>
+            <%= link_to listing_path(listing) do%>
+              <i class="material-icons prefix">shopping_cart</i>
+            <% end %>
+            <span class="activator">
+              <i class="material-icons right">more_vert</i>
+            </span>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large waves-effect waves-light red" href=<%=new_listing_path%>>
+          <i class="material-icons">add</i>
+      </a>
+    </div>
+  <% end %>
+</div>
+
