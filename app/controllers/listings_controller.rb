@@ -26,6 +26,7 @@ class ListingsController < ApplicationController
   def create
     #scaffold generated create bang version (with !) - it was raising an exception and not handling that in the view
     @listing = Listing.create(listing_params)
+    @listing.user_id = current_user.id
 
     respond_to do |format|
       if @listing.save

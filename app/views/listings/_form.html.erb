@@ -6,17 +6,17 @@
 </script>
 
  <div id="errors">
-      <% if listing.errors.any? %>
-          <% errors = "" %>
+  <% if listing.errors.any? %>
+      <% errors = "" %>
 
-          <% listing.errors.full_messages.each do |message| %>
-            <%  errors = errors + message + "<br>" %>
-          <% end %>
-
-          <%= javascript_tag "M.toast({html: \"#{errors}\", classes: 'toast-error', displayLength: '40000'})" %>
-        
+      <% listing.errors.full_messages.each do |message| %>
+        <%  errors = errors + message + "<br>" %>
       <% end %>
-    </div>
+
+      <%= javascript_tag "M.toast({html: \"#{errors}\", classes: 'toast-error', displayLength: '40000'})" %>
+    
+  <% end %>
+</div>
 <div class="row">
   <%= form_with(model: listing, local: true) do |form| %>
   <form class="col s6">
