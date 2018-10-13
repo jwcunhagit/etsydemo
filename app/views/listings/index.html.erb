@@ -28,16 +28,18 @@
               <i class="material-icons right">close</i>
             </span>
               <p><%= listing.description %></p>
-              <p><strong><%= listing.price %></strong></p>
+              <p><strong><%= number_to_currency(listing.price) %></strong></p>
               <p><%= "Sold by #{listing.user.first_name} #{listing.user.last_name}" %></p>
             </span>
           </div>
           <div class="card-action">
-            <%= link_to edit_listing_path(listing) do%>
+            <% if (user_signed_in? && ( current_user == listing.user)) %>
+              <%= link_to edit_listing_path(listing) do%>
                 <i class="material-icons prefix">edit</i>
-            <% end %>
-            <%= link_to listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
-              <i class="material-icons prefix">delete</i>
+              <% end %>
+              <%= link_to listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
+                <i class="material-icons prefix">delete</i>
+              <% end %>
             <% end %>
             <%= link_to listing_path(listing) do%>
               <i class="material-icons prefix">description</i>
@@ -52,10 +54,13 @@
         </div>
       </div>
   <% end %>
-  <div class="fixed-action-btn">
-    <a class="btn-floating btn-large waves-effect waves-light red" href=<%=new_listing_path%>>
-        <i class="material-icons">add</i>
-    </a>
-  </div>
+
+  <% if user_signed_in? %>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large waves-effect waves-light red" href=<%=new_listing_path%>>
+          <i class="material-icons">add</i>
+      </a>
+    </div>
+  <% end %>
 </div>
 

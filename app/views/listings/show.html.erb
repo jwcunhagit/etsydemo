@@ -7,21 +7,26 @@
 	</div>
 	<div class="col s6">
   		<p><b><%= @listing.name %></b></p>
-  		<p><strong><%= @listing.price %></strong></p>
+  		<p><strong><%= number_to_currency(@listing.price) %></strong></p>
 	</div>
 	<div class="col s6">
 		<p><%= "Sold by #{@listing.user.first_name} #{@listing.user.last_name}" %></p>
 	</div>
 	<div class="col s6">
-		<%= link_to edit_listing_path(@listing) do%>
-			<i class="material-icons prefix">edit</i>
+		<% if (current_user == @listing.user) %>
+			<%= link_to edit_listing_path(@listing) do%>
+				<i class="material-icons prefix">edit</i>
+			<% end %>
+			<%= link_to @listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
+				<i class="material-icons prefix">delete</i>
+			<% end %>
 		<% end %>
 		<%= link_to listings_path do%>
 			<i class="material-icons prefix">list</i>
 		<% end %>
-		<%= link_to @listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
-			<i class="material-icons prefix">delete</i>
-		<% end %>
+		<%= link_to listing_path(@listing) do%>
+           	<i class="material-icons prefix">shopping_cart</i>
+       	<% end %>
 	</div>
 	<div class="col s12">
 		<%= @listing.description %>
