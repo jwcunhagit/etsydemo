@@ -1,9 +1,71 @@
 <script>
   $(document).ready(function(){
     $('.fixed-action-btn').floatingActionButton();
+    $('.carousel').carousel();
+    $('.materialboxed').materialbox();
+    $('.dropdown-trigger').hover = true;
+    $('.dropdown-trigger').dropdown();
   });
 </script>
-<h5>Listings \o/</h5>
+<h5>My store</h5>
+
+
+<div class="row">
+  <table class="responsive-table">
+    <tr>
+      <td width="40%">Image</td>
+      <td width="20%">Name</td>
+      <td width="20%">Description</td>
+      <td width="10%">Price</td>
+      <td width="10%">Actions</td>
+    </tr>
+    <% @listings.each do |listing| %>
+      <tr>
+        <td>
+          <% if listing.images.attached? %>
+              <% listing.images.each do |image| %>
+                <%= image_tag url_for(image.variant(resize: "200x200").processed.service_url), class: "materialboxed"%>
+              <% end %>
+          <% else %>
+            <%= image_tag "https://s3.amazonaws.com/etsydemo05/images/noimage.png" %>
+          <% end %>
+        </td>
+        <td>
+          <%= listing.name %>
+        </td>
+        <td>
+          <%= listing.description %>
+        </td>
+        <td>
+          <%= number_to_currency(listing.price) %>
+        </td>
+        <td>
+          <a class="dropdown-trigger btn" href="#" data-target="dropdown1">Actions</a>
+
+          <ul id="dropdown1" class="dropdown-content">
+            <li>
+              <%= link_to edit_listing_path(listing) do%>
+                  <i class="material-icons prefix">edit</i>Edit
+              <% end %>
+            </li>
+            <li>
+              <%= link_to listing, method: :delete, data: { confirm: 'Are you sure?' } do%>
+                  <i class="material-icons prefix">delete</i>Delete
+              <% end %>
+            </li>
+            <li>
+              <%= link_to listing do%>
+                  <i class="material-icons prefix">description</i>View
+              <% end %>          
+            </li>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+</table>
+</div>
+
+
 <div class="row">
   <% @listings.each do |listing| %>
       <div class="col s3">
