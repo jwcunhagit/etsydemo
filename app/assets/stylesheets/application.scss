@@ -24,3 +24,36 @@ i{
 	background-color: #43a047;
 }
 
+.jumbotron {
+	background-image: url('jumbotron.jpg');
+	background-color: #F0F0F0;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-top: 10px;
+
+	h1, h2 {
+		font-family: guardian-egyptt, georgia, serif;
+		color: #FFFFFF;
+	}
+
+	h1 {
+		font-size: 60px;
+	}
+
+	h2 {
+		font-size: 40px;
+	}
+
+}
+
+.etsynav {
+	background-color: #3D5B7F;
+}
+
+.etsyfooter {
+	background-color: #E2CFAC;
+
+	p, h5 {
+		color: #3D5B7F;
+	}
+}
