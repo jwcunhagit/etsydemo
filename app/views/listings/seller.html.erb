@@ -21,13 +21,7 @@
     <% @listings.each do |listing| %>
       <tr>
         <td>
-          <% if listing.images.attached? %>
-              <% listing.images.each do |image| %>
-                <%= image_tag url_for(image.variant(resize: "200x200").processed.service_url), class: "materialboxed"%>
-              <% end %>
-          <% else %>
-            <%= image_tag "https://s3.amazonaws.com/etsydemo05/images/noimage.png" %>
-          <% end %>
+            <%= render partial: "listings/images_carousel", :locals => {:images => listing.images} %> 
         </td>
         <td>
           <%= listing.name %>

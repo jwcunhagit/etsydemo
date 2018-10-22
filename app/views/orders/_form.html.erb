@@ -28,9 +28,10 @@
           <%= form.label :state %>
           <%= form.text_field :state %>
         </div>
-
-        <div class="actions">
-        <%= form.submit %>
+        <br>
+        <div class="waves-effect waves-light btn">
+          <i class="material-icons left">attach_money</i>
+          <%= form.submit "Buy now" %>
         </div>
     <% end %>
   </div>
@@ -38,6 +39,6 @@
     <p><b><%= @listing.name %></b></p>
     <p><%= "Sold by #{@listing.user.first_name} #{@listing.user.last_name}" %></p>
     <p><strong><%= number_to_currency(@listing.price) %></strong></p>
-    <%= render "listings/images_carousel" %>
+    <%= render partial: "listings/images_carousel", :locals => {:images => @listing.images} %> 
   </div>
 </div>

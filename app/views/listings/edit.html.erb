@@ -5,7 +5,7 @@
 		<%= render 'form', listing: @listing %>
 	</div>
 	<div class="col s6" style="padding: 10px">
-		<%= render 'images_carousel', listing: @listing %>
+		<%= render partial: "images_carousel", :locals => {:images => @listing.images} %> 
 	</div>
 </div>
 

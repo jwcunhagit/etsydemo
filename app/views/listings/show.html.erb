@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="col s6">
-		<%= render "images_carousel" %>
+		<%= render partial: "listings/images_carousel", :locals => {:images => @listing.images} %> 
 	</div>
 	<div class="col s6">
   		<p><b><%= @listing.name %></b></p>

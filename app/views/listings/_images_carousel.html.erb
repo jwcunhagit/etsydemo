@@ -5,12 +5,12 @@
 </script>
 
 <div class="carousel">
-	<% if @listing.images.attached? %>
-			<% @listing.images.each do |image| %>
-				<a class="carousel-item">
-					<%= image_tag url_for(image) %> 
-				</a>
-			<% end %>
+	<% if images.attached? %>
+		<% images.each do |image| %>
+			<a class="carousel-item">
+				<%= image_tag url_for(image) %> 
+			</a>
+		<% end %>
 	<% else %>
 		<a class="carousel-item">
 			<%= image_tag "https://s3.amazonaws.com/etsydemo05/images/noimage.png" %>

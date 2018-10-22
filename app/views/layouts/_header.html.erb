@@ -1,10 +1,50 @@
 <script>
   $(document).ready(function(){
     $('.sidenav').sidenav();
+    $('.dropdown-trigger').dropdown();
+
   });
 </script>
 
-<nav class="etsynav">
+
+<!-- DESKTOP MENU VERSION -->
+
+
+<!-- dropdown menu structure for Purchase history-->
+<ul id='dropdown-seller-account' class='dropdown-content'>
+	<li>
+		<%= link_to sales_path do %>
+			<i class="material-icons">poll</i><br>Sales History
+		<% end %>
+	</li>
+	
+	<li>
+		<%= link_to seller_url do%>
+		<i class="material-icons">store</i><br>My Store
+		<% end %>
+	</li>
+</ul>
+
+<!-- dropdown menu structure for User actions -->
+<ul id='dropdown-user' class='dropdown-content'>
+	<li>
+		<%= link_to purchases_path do %>
+			<i class="material-icons">local_atm</i><br>Purchases History
+		<% end %>
+	</li>
+	<li>
+		<%= link_to edit_user_registration_url do %>
+			<i class="material-icons">person</i><br>Profile
+		<% end %>
+	</li>
+	<li>
+		<%= link_to destroy_user_session_url, method: :delete do%>
+		<i class="material-icons">exit_to_app</i><br>Logout
+		<% end %>
+	</li>
+</ul>
+
+<nav class="nav-extended etsynav">
 	<div class="nav-wrapper">
 		<a href=<%= root_path %> class="brand-logo">
 			ETSY Demo
@@ -25,19 +65,16 @@
 			</li>
 			<% if user_signed_in? %>
 				<li>
-					<%= link_to edit_user_registration_url do %>
-						<i class="material-icons">person</i>
-					<% end %>
+					<a class='dropdown-trigger' href='#' data-target='dropdown-seller-account'>
+						Seller Account
+						<i class="material-icons right">arrow_drop_down</i>
+					</a>
 				</li>
 				<li>
-					<%= link_to destroy_user_session_url, method: :delete do%>
-					<i class="material-icons">exit_to_app</i>
-					<% end %>
-				</li>
-				<li>
-					<%= link_to seller_url do%>
-					<i class="material-icons">store</i>
-					<% end %>
+					<a class='dropdown-trigger' href='#' data-target='dropdown-user'>
+						<%= current_user.first_name+" "+current_user.last_name %>
+						<i class="material-icons right">arrow_drop_down</i>
+					</a>
 				</li>
 			<% else %>
 				<li>
@@ -51,7 +88,70 @@
 	</div>
 </nav>
 
-<ul class="sidenav" id="mobile-demo">
+
+<!-- MOBILE MENU VERSION -->
+
+
+<!-- dropdown menu structure for Purchase history-->
+<ul id='dropdown-seller-account-mobile' class='dropdown-content'>
+	<li>
+		<%= link_to sales_path do %>
+			<i class="material-icons">poll</i>Sales History
+		<% end %>
+	</li>
+	
+	<li>
+		<%= link_to seller_url do%>
+		<i class="material-icons">store</i>My Store
+		<% end %>
+	</li>
+</ul>
+
+<ul id='dropdown-user-mobile' class='dropdown-content'>
+	<li>
+		<%= link_to purchases_path do %>
+			<i class="material-icons">local_atm</i>Purchases History
+		<% end %>
+	</li>
+	<li>
+		<%= link_to edit_user_registration_url do %>
+			<i class="material-icons">person</i>Profile
+		<% end %>
+	</li>
+	<li>
+		<%= link_to destroy_user_session_url, method: :delete do%>
+			<i class="material-icons">exit_to_app</i>Logout
+		<% end %>
+	</li>
+</ul>
+
+<ul class="sidenav slide-out" id="mobile-demo">
+	<% if user_signed_in? %>
+		<li>
+			<div class="user-view">
+				<%=image_tag "user.png" %>
+			</div>
+		</li>
+		<li>
+			<a class='dropdown-trigger' href='#' data-target='dropdown-seller-account-mobile'>
+				Seller Account
+				<i class="material-icons right">arrow_drop_down</i>
+			</a>
+		</li>
+		<li>
+			<a class='dropdown-trigger' href='#' data-target='dropdown-user-mobile'>
+				<%= current_user.first_name+" "+current_user.last_name %>
+				<i class="material-icons right">arrow_drop_down</i>
+			</a>
+		</li>
+	<% else %>
+		<li>
+			<%= link_to "Sign in", new_user_session_url %>
+		</li>
+		<li>
+			<%= link_to "Sign up", new_user_registration_url %>
+		</li>
+	<% end %>
 	<li>
 		<%= link_to pages_contact_url do%>
 		<i class="material-icons">contact_mail</i>Contact
@@ -62,28 +162,4 @@
 		<i class="material-icons">info</i>About
 		<% end %>
 	</li>
-	<% if user_signed_in? %>
-		<li>
-			<%= link_to edit_user_registration_url do %>
-				<i class="material-icons">person</i>Profile
-			<% end %>
-		</li>
-		<li>
-			<%= link_to destroy_user_session_url, method: :delete do%>
-			<i class="material-icons">exit_to_app</i>Sign out
-			<% end %>
-		</li>
-		<li>
-			<%= link_to seller_url do%>
-				<i class="material-icons">store</i>My store
-			<% end %>
-		</li>
-	<% else %>
-		<li>
-			<%= link_to "Sign in", new_user_session_url %>
-		</li>
-		<li>
-			<%= link_to "Sign up", new_user_registration_url %>
-		</li>
-	<% end %>
 </ul>

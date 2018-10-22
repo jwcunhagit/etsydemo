@@ -1,0 +1,40 @@
+<script>
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+    $('.materialboxed').materialbox();
+    $('.dropdown-trigger').dropdown();
+  });
+</script>
+<h5>Purchase history</h5>
+
+
+<div class="row">
+  <table class="responsive-table">
+    <tr>
+      <td width="20%">Image</td>
+      <td width="40%">Item</td>
+      <td width="20%">Price</td>
+      <td width="10%">Seller</td>
+      <td width="10%">Date purchased</td>
+    </tr>
+    <% @orders.each do |order| %>
+      <tr>
+        <td>
+          <%= render partial: "listings/images_carousel", :locals => {:images => order.listing.images} %> 
+        </td>
+        <td>
+          <%= order.listing.name %>
+        </td>
+        <td>
+          <%= number_to_currency(order.listing.price) %>
+        </td>
+        <td>
+          <%= order.seller.first_name+" "+order.seller.last_name %>
+        </td>
+        <td>
+          <%= order.created_at.strftime("%B %-d, %Y") %>
+        </td>
+      </tr>
+    <% end %>
+</table>
+</div>
