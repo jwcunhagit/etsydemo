@@ -1,4 +1,15 @@
-<div class="row">
+<script>
+   $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>
+<div class="row" style="margin-top: 50px">
+  <div class="col s6" >
+    <%= render partial: "listings/images_carousel", :locals => {:images => @listing.images} %> 
+    <p><b><%= @listing.name %></b></p>
+    <p><%= "Sold by #{@listing.user.first_name} #{@listing.user.last_name}" %></p>
+    <p><strong><%= number_to_currency(@listing.price) %></strong></p>
+  </div>
   <div class="col s6">
     <%= form_with(model: [@listing, order], local: true) do |form| %> 
       <div id="errors">
@@ -28,17 +39,38 @@
           <%= form.label :state %>
           <%= form.text_field :state %>
         </div>
-        <br>
+
+        <div class="row">
+          <div class="col s8">
+            <div class="field">
+              <%= label_tag :card_number, "Credit Card Number" %>
+              <%= text_field_tag :card_number, nil, { :name => nil, :'data-stripe' => "number"} %>
+            </div>
+          </div>
+
+          <div class="col s4">
+            <div class="field">
+              <%= label_tag :card_cvc, "CVC" %>
+              <%= text_field_tag :card_code, nil, { :name => nil, :'data-stripe' => "cvc"} %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field col m4">
+              <%= label_tag :card_exp_month, "Exp month" %>
+              <%= select_month nil, { :add_months_numbers => true,  use_two_digit_numbers: true}, { :name => nil, :'data-stripe' => "exp-month"} %>
+          </div>
+          <div class="field col m4">
+              <%= label_tag :card_exp_year, "Exp year" %>
+              <%= select_year nil, { start_year: Date.today.year, end_year: Date.today.year+10 }, { :name => nil, :'data-stripe' => "exp-year"} %>
+          </div>
+        </div>
+        <br><br>
         <div class="waves-effect waves-light btn">
           <i class="material-icons left">attach_money</i>
           <%= form.submit "Buy now" %>
         </div>
     <% end %>
-  </div>
-  <div class="col s6">
-    <p><b><%= @listing.name %></b></p>
-    <p><%= "Sold by #{@listing.user.first_name} #{@listing.user.last_name}" %></p>
-    <p><strong><%= number_to_currency(@listing.price) %></strong></p>
-    <%= render partial: "listings/images_carousel", :locals => {:images => @listing.images} %> 
   </div>
 </div>

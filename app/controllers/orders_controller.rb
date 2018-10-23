@@ -3,6 +3,19 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
 
+  def payment
+    Stripe.api.key = Rails.application.credentials.dig(:strip_test, :secret_key)
+
+    token = params[:stripeToken]
+
+    #charge = Stripe::Charge.create({
+    #  amount: 1,
+    #  currency: 'eur'
+    #  source: token
+
+    #})
+  end
+
   def sales
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
   end
