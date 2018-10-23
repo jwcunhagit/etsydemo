@@ -3,11 +3,14 @@
   <head>
     <title>Etsydemo</title>
     <%= csrf_meta_tags %>
+    <%= tag :meta, :name => "stripe-key", :content => Rails.application.credentials.dig(:strip_test, :publishable_key) %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'https://s3.amazonaws.com/etsydemo05/images/favicon.ico', :rel => 'icon', :type =>  'image/png' %>
+    <%= javascript_include_tag "https://js.stripe.com/v2" %>
+    <%= javascript_include_tag "https://js.stripe.com/v3" %>
     
   </head>
 

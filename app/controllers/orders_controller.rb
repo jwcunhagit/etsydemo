@@ -3,19 +3,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
 
-  def payment
-    Stripe.api.key = Rails.application.credentials.dig(:strip_test, :secret_key)
-
-    token = params[:stripeToken]
-
-    #charge = Stripe::Charge.create({
-    #  amount: 1,
-    #  currency: 'eur'
-    #  source: token
-
-    #})
-  end
-
   def sales
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
   end
@@ -56,16 +43,37 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     @order.seller_id = @seller.id
 
+    Stripe.api_key = Rails.application.credentials.dig(:strip_test, :secret_key)
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to root_url, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    token = params[:stripeToken]
+
+    charge = Stripe::Charge.create({
+          amount: (@listing.price*100).to_i,
+          currency: 'eur',
+          description: @listing.name,
+          source: token,
+        })      
+
+    
+    begin
+      respond_to do |format|
+        if @order.save
+          format.html { redirect_to root_url, notice: 'Order was successfully created.' }
+          format.json { render :show, status: :created, location: @order }
+        else
+          format.html { render :new }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
       end
+    rescue Stripe::CardError => e
+      #format.html { render :new }
+      #format.json { render json: e, status: :unprocessable_entity }
+    rescue => e
+      format.html { render :new }
+      format.json { render json: e, status: :unprocessable_entity }
     end
+
+    
   end
 
   # PATCH/PUT /orders/1
